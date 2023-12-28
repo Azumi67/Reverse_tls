@@ -1,5 +1,3 @@
-**به زودی اپدیت میشود**
-
 ![R (2)](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/a064577c-9302-4f43-b3bf-3d4f84245a6f)
 نام پروژه : ریورس تانل WS + WSS[TLS]
 ---------------------------------------------------------------
@@ -23,10 +21,13 @@
 - من در وقت آزاد این را درست کردم و ممکن است اشتباهاتی هم داخلش باشد. پیشاپیش ببخشید.
 
 ------------------------
+
 ![307981](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/39b2794b-fd04-4ae5-baea-d4b66138766e)
  **فهرست :**
  ----------------------
  - **دسترسی سریع به اسکریپت** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%85%D9%86)**
+- **نصب go به صورت دستی یا با اسکریپت** >> [کلیک]()
+- **امکانات** >> [کلیک]()
 - ** تانل ریورس WS ایپی 4 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-tcp)**
 - **تانل ریورس WS ایپی 6 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-6-tcp)
 - **تانل ریورس WS ایپی 4 [UDP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-udp)
@@ -36,6 +37,32 @@
 - **اسکریپت های کارآمد** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%87%D8%A7%DB%8C-%DA%A9%D8%A7%D8%B1%D8%A2%D9%85%D8%AF-)
 
 --------------
+![Go_(programming_language)-Logo wine](https://github.com/Azumi67/UDP2RAW_FEC/assets/119934376/71b80a34-9515-42de-8238-9065986104a1)**اموزش نصب go مورد نیاز برای اجرای اسکریپت**
+-
+- شما میتوانید از طریق اسکریپت [Here](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%85%D9%86) ، این پیش نیاز را نصب کنید یا به صورت دستی نصب نمایید.
+- حتما در صورت مشکل دانلود، dns های خود را تغییر دهید.
+- لطفا پس از نصب پیش نیاز ، برای اجرای اسکریپت go برای بار اول، ممکن تا 10 ثانیه طول بکشد اما بعد از آن سریع اجرا میشود.
+```
+sudo apt update
+arm64 : wget https://go.dev/dl/go1.21.5.linux-arm64.tar.gz
+arm64 : sudo tar -C /usr/local -xzf go1.21.5.linux-arm64.tar.gz
+
+amd64 : wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
+amd64 : sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
+
+nano ~/.bash_profile
+paste this into it : export PATH=$PATH:/usr/local/go/bin
+save and exit with Ctrl + x , then Y
+
+source ~/.bash_profile
+go mod init mymodule
+go mod tidy
+go get github.com/AlecAivazis/survey/v2
+go get github.com/fatih/color
+
+```
+- سپس اسکریپت را میتوانید اجرا نمایید.
+------------------
 ![check](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/13de8d36-dcfe-498b-9d99-440049c0cf14)
 **امکانات**
 -
@@ -428,10 +455,16 @@ wget "https://raw.githubusercontent.com/hawshemi/Linux-Optimizer/main/linux-opti
 ![R (a2)](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/716fd45e-635c-4796-b8cf-856024e5b2b2)
 **اسکریپت من**
 ----------------
-
+- دستور زیر فایل های پیش نیاز را نصب میکند و سپس اقدام به اجرای اسکریپت میکند. اگر مشکلی داشتید به صورت دستی هم میتوانید نصب کنید
+```
+sudo apt install curl -y && bash <(curl -s https://raw.githubusercontent.com/Azumi67/Reverse_tls/main/go.sh)
 ```
 
+- اگر به صورت دستی نصب کردید و پیش نیاز ها را هم دارید و میخواهید به صورت دستی هم اسکریپت را اجرا کنید میتوانید با دستور زیر اینکار را انجام دهید
 ```
+sudo apt install wget -y && wget https://raw.githubusercontent.com/Azumi67/Reverse_tls/main/tls.go && go run tls.go
+```
+
 ---------------------------------------------
 ![R23 (1)](https://github.com/Azumi67/FRP-V2ray-Loadbalance/assets/119934376/18d12405-d354-48ac-9084-fff98d61d91c)
 **سورس ها**

@@ -1,4 +1,5 @@
 **به زودی اپدیت میشود**
+
 ![R (2)](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/a064577c-9302-4f43-b3bf-3d4f84245a6f)
 نام پروژه : ریورس تانل WS + WSS[TLS]
 ---------------------------------------------------------------
@@ -24,15 +25,6 @@
  **فهرست :**
  ----------------------
  
-**دسترسی سریع به اسکریپت** >> **[کلیک](https://github.com/Azumi67/KCP_tunnel#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%85%D9%86)**
-- **امکانات** >> **[کلیک](https://github.com/Azumi67/KCP_tunnel/tree/main#%D8%A7%D9%85%DA%A9%D8%A7%D9%86%D8%A7%D8%AA)**
-- **تک سرور** : 
-- **تانل KCP TCP تک کانفیگ** >> **[کلیک](https://github.com/Azumi67/KCP_tunnel/tree/main#%D8%AA%D8%A7%D9%86%D9%84-kcp-tcp-%D8%AA%DA%A9-%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF)**
--  **تانل KCP + ICMP تک کانفیگ** >> **[کلیک](https://github.com/Azumi67/KCP_tunnel/tree/main#%D8%AA%D8%A7%D9%86%D9%84-kcp--icmp-%D8%AA%DA%A9-%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF)**
--  **تانل KCP TCP مولتی کانفیگ (1 یا چند سرور خارج)** >> **[کلیک](https://github.com/Azumi67/KCP_tunnel/tree/main#%D8%AA%D8%A7%D9%86%D9%84-kcp-tcp-%D9%85%D9%88%D9%84%D8%AA%DB%8C-%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF)**
-- **تانل KCP + ICMP مولتی کانفیگ** >>  **[کلیک](https://github.com/Azumi67/KCP_tunnel/tree/main#%D8%AA%D8%A7%D9%86%D9%84-kcp--icmp-%D9%85%D9%88%D9%84%D8%AA%DB%8C-%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF)**
-- **تانل KCP + PrivateIP کانفیگ** >> **[کلیک](https://github.com/Azumi67/KCP_tunnel#%D8%AA%D8%A7%D9%86%D9%84-kcp--privateip-%DA%A9%D8%A7%D9%86%D9%81%DB%8C%DA%AF)**
-- **اسکریپت های کارآمد** >> **[کلیک](https://github.com/Azumi67/KCP_tunnel#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%87%D8%A7%DB%8C-%DA%A9%D8%A7%D8%B1%D8%A2%D9%85%D8%AF-)**
 
 --------------
 ![check](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/13de8d36-dcfe-498b-9d99-440049c0cf14)

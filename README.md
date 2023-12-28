@@ -26,8 +26,8 @@
  **فهرست :**
  ----------------------
  - **دسترسی سریع به اسکریپت** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%85%D9%86)**
-- **نصب go به صورت دستی یا با اسکریپت** >> [کلیک]()
-- **امکانات** >> [کلیک]()
+- **نصب go به صورت دستی یا با اسکریپت** >> [کلیک](https://github.com/Azumi67/Reverse_tls/blob/main/README.md#%D8%A7%D9%85%D9%88%D8%B2%D8%B4-%D9%86%D8%B5%D8%A8-go-%D9%85%D9%88%D8%B1%D8%AF-%D9%86%DB%8C%D8%A7%D8%B2-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C-%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA)
+- **امکانات** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D9%85%DA%A9%D8%A7%D9%86%D8%A7%D8%AA)
 - ** تانل ریورس WS ایپی 4 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-tcp)**
 - **تانل ریورس WS ایپی 6 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-6-tcp)
 - **تانل ریورس WS ایپی 4 [UDP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-udp)

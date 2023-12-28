@@ -18,6 +18,7 @@
 - حتما ریست تایمر سرور خارج و ایران یکسان باشد.
 - پنل شما در خارج باید نصب شده باشد
 - اگر به هر دلیلی پیش نیاز ها برای شما نصب نشد و خطا گرفتید، دوباره امتحان بفرمایید.
+- اگر به هر دلیلی نتوانستید برای ساب دامین خود cert بگیرید به صورت دستی با acme اینکار را انجام دهید و سپس قسمت cert در اسکریپت را skip کنید.
 - همیشه اگر مشکلی در تانل شما است در قسمت status و لاگ های تانل، سرویستان را نگاه کنید.
 - من در وقت آزاد این را درست کردم و ممکن است اشتباهاتی هم داخلش باشد. پیشاپیش ببخشید.
 
@@ -25,7 +26,14 @@
 ![307981](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/39b2794b-fd04-4ae5-baea-d4b66138766e)
  **فهرست :**
  ----------------------
- 
+ - **دسترسی سریع به اسکریپت** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%85%D9%86)**
+- ** تانل ریورس WS ایپی 4 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-tcp)**
+- **تانل ریورس WS ایپی 6 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-6-tcp)
+- **تانل ریورس WS ایپی 4 [UDP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-udp)
+- **تانل ریورس WS ایپی 6 [UDP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-6-udp)
+- **تانل ریورس TLS با ساب دامین [TCP]** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-tls-%D8%A8%D8%A7-%D8%B3%D8%A7%D8%A8-%D8%AF%D8%A7%D9%85%DB%8C%D9%86-tcp)
+- **تانل ریورس TLS با ساب دامین [UDP]** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-tls-%D8%A8%D8%A7-%D8%B3%D8%A7%D8%A8-%D8%AF%D8%A7%D9%85%DB%8C%D9%86-udp)
+- **اسکریپت های کارآمد** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%87%D8%A7%DB%8C-%DA%A9%D8%A7%D8%B1%D8%A2%D9%85%D8%AF-)
 
 --------------
 ![check](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/13de8d36-dcfe-498b-9d99-440049c0cf14)
@@ -276,22 +284,20 @@
 
 **مسیر : WSS TCP > IRAN**
 
-
-
  <p align="right">
   <img src="https://github.com/Azumi67/Reverse_tls/assets/119934376/8ac6c5df-27fc-458c-b9e8-c83e5a3d84ad" alt="Image" />
 </p>
-
-
 
 - نخست سرور ایران را کانفیگ میکنیم
 - اگر خطای GIT CLONE در نصب پیش نیاز ها گرفتید، دوباره تلاش کنید
 - من قبلا CERT برای ساب دامین ام نگرفتم، پس گزینه NO رو میزنم که ACME نصب بشود.
 - ایمیل ادرس را وارد میکنم و سپس ساب دامین را وارد میکنم که CERT برایش گرفته شود.
 - من پشت ساب دامین از ایپی 4 استفاده کردم. شما میتوانید با ایپی 6 NATIVE هم تست نمایید.
+
  <p align="right">
   <img src="https://github.com/Azumi67/Reverse_tls/assets/119934376/0b5f950a-151c-425f-9692-eb57316481a9" alt="Image" />
 </p>
+
 - من دو سرور خارج داشتم پس عدد 2 را وارد میکنم.
 - پورت تانل باید 443 باشد.(توجه کنید)
 - نام ساب دامین تان را وارد نمایید. ساب دامینی که برایش CERT گرفتید.

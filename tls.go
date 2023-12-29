@@ -753,30 +753,54 @@ func install1() {
 	displayNotification("Installing Reverse Tunnel")
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
 	hideCmd("apt", "install", "git", "-y")
-	runCmd("git", "clone", "https://github.com/snsinfu/reverse-tunnel")
 	
-	err := os.Chdir("reverse-tunnel")
-	if err != nil {
-		log.Fatalf("Couldn't Change Dir: %v", err)
+	dir := "/root/reverse-tunnel"
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		runCmd("git", "clone", "https://github.com/snsinfu/reverse-tunnel", dir)
+	} else {
+		err := os.Chdir(dir)
+		if err != nil {
+			log.Fatalf("\033[91mCouldn't Change Dir:\033[0m %v", err)
+		}
+		runCmd("git", "pull")
 	}
+	
+	err := os.Chdir(dir)
+	if err != nil {
+		log.Fatalf("\033[91mCouldn't Change Dir:\033[0m %v", err)
+	}
+	
 	runCmd("go", "build", "-o", "rtun-server", "github.com/snsinfu/reverse-tunnel/server/cmd")
+	
 	displayCheckmark(fmt.Sprintf("\033[92mInstallation was Successful\033[0m"))
 }
-
 func install2() {
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
 	displayNotification("Installing Reverse Tunnel")
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
 	hideCmd("apt", "install", "git", "-y")
-	runCmd("git", "clone", "https://github.com/snsinfu/reverse-tunnel")
 	
-	err := os.Chdir("reverse-tunnel")
-	if err != nil {
-		log.Fatalf("Couldn't Change Dir: %v", err)
+	dir := "/root/reverse-tunnel"
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		runCmd("git", "clone", "https://github.com/snsinfu/reverse-tunnel", dir)
+	} else {
+		err := os.Chdir(dir)
+		if err != nil {
+			log.Fatalf("\033[91mCouldn't Change Dir:\033[0m %v", err)
+		}
+		runCmd("git", "pull")
 	}
+	
+	err := os.Chdir(dir)
+	if err != nil {
+		log.Fatalf("\033[91mCouldn't Change Dir:\033[0m %v", err)
+	}
+	
 	runCmd("go", "build", "-o", "rtun-client", "github.com/snsinfu/reverse-tunnel/agent/cmd")
+	
 	displayCheckmark(fmt.Sprintf("\033[92mInstallation was Successful\033[0m"))
 }
+
 func wsMenu1() {
 	clearScreen()
 	fmt.Println("\033[92m ^ ^\033[0m")

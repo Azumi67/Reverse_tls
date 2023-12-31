@@ -919,7 +919,9 @@ Description=Rtun server
 Type=simple
 ExecStart=/root/reverse-tunnel/./rtun-server -f /root/reverse-tunnel/rtun-server.yml
 Restart=always
-RestartSec=10
+RestartSec=5
+LimitNOFILE=1048576
+
 
 [Install]
 WantedBy=default.target
@@ -1047,7 +1049,8 @@ Description=Rtun client
 Type=simple
 ExecStart=/root/reverse-tunnel/./rtun-client -f /root/reverse-tunnel/rtun-client.yml
 Restart=always
-RestartSec=10
+RestartSec=5
+LimitNOFILE=1048576
 
 [Install]
 WantedBy=default.target

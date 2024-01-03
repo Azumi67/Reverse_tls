@@ -455,7 +455,7 @@ func startMain() {
 		start()
 	case "2. \033[93mStop \033[0m":
 		stop()
-	case "0. \033[94mBack to the previous menu\033[0m":
+	case "0. \033[94mBack to the main menu\033[0m":
 	    clearScreen()
 		mainMenu()
 	default:

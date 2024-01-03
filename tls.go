@@ -280,8 +280,10 @@ func resKharej() {
 	defer file.Close()
 
 	file.WriteString("#!/bin/bash\n")
-	file.WriteString("systemctl daemon-reload\n")
-	file.WriteString("systemctl restart rtun-kharej\n")
+	file.WriteString("sudo systemctl daemon-reload\n")
+	file.WriteString("sudo systemctl restart rtun-kharej\n")
+	file.WriteString("sync; echo 1 | sudo tee /proc/sys/vm/drop_caches\n")
+        file.WriteString("sudo journalctl --vacuum-size=1M\n")
 
 	cmd := exec.Command("chmod", "+x", "/etc/tls.sh")
 	if err := cmd.Run(); err != nil {
@@ -357,8 +359,10 @@ func resIran() {
 	defer file.Close()
 
 	file.WriteString("#!/bin/bash\n")
-	file.WriteString("systemctl daemon-reload\n")
-	file.WriteString("systemctl restart rtun-iran\n")
+	file.WriteString("sudo systemctl daemon-reload\n")
+	file.WriteString("sudo systemctl restart rtun-iran\n")
+	file.WriteString("sync; echo 1 | sudo tee /proc/sys/vm/drop_caches\n")
+        file.WriteString("sudo journalctl --vacuum-size=1M\n")
 
 	cmd := exec.Command("chmod", "+x", "/etc/tls.sh")
 	if err := cmd.Run(); err != nil {

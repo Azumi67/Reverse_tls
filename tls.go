@@ -261,7 +261,7 @@ func deleteCron() {
 		}
 		displayNotification("\033[92mDeleting Previous Crons..\033[0m")
 	} else {
-		displayError("\033[91mNothing Found, moving on..!\033[0m")
+		fmt.Println("\033[91mCron doesn't exists, moving on..!\033[0m")
 	}
 }
 
@@ -1039,6 +1039,10 @@ func iranService() error {
 	if err != nil {
 		return fmt.Errorf("\033[91mFailed to enable Service:\033[0m %v", err)
 	}
+	err = exec.Command("sudo", "chmod", "u+x", "/etc/systemd/system/rtun-iran.service").Run()
+	if err != nil {
+		return fmt.Errorf("\033[91mFailed to enablin Service:\033[0m %v", err)
+	}
 	err = exec.Command("systemctl", "restart", "rtun-iran").Run()
 	if err != nil {
 		return fmt.Errorf("\033[91mFailed to restart Service!:\033[0m %v", err)
@@ -1153,6 +1157,10 @@ func KharejService() error {
 	err = exec.Command("systemctl", "enable", "rtun-kharej").Run()
 	if err != nil {
 		return fmt.Errorf("\033[91mFailed to enable Service:\033[0m %v", err)
+	}
+	err = exec.Command("sudo", "chmod", "u+x", "/etc/systemd/system/rtun-kharej.service").Run()
+	if err != nil {
+		return fmt.Errorf("\033[91mFailed to enablin Service:\033[0m %v", err)
 	}
 	err = exec.Command("systemctl", "restart", "rtun-kharej").Run()
 	if err != nil {

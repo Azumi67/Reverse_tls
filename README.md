@@ -2,13 +2,30 @@
 نام پروژه : ریورس تانل WS + WSS[TLS]
 ---------------------------------------------------------------
 
------------
-**توضیح کوتاه در مورد این پروژه :**
+![check](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/13de8d36-dcfe-498b-9d99-440049c0cf14)
+**امکانات**
+
+
+- پشتیبانی از TCP و UDP
+- قابلیت تانل بر روی چندین پورت
+- امکان استفاده از ایپی 4 و 6
+- ریست تایمر انتخابی توسط شما
+- امکان استفاده از ساب دامین در ریورس تانل ( باید برایش cert گرفته شود)
+- امکان استفاده از چند سرور خارج و یک سرور ایران
+- امکان حذف تمامی تانل ها و سرویس ها
+
+ ------------------------------------------------------
+
+ <div align="right">
+  <details>
+    <summary><strong>توضیحات</strong></summary>
+  
+------------------------------------ 
+
 - **اگر سرعتتون پایین بود، لطفا هم بر روی سرور ایران و خارج optimizer نصب کنید.**
 - حتما در سرور تست، نخست تانل را ازمایش کنید و سپس اقدام به استفاده از آن بکنید.
 - تمامی تست های من با سرورهای کاملا فیلتر شده بوده است.
 - در این اسکریپت شما یا با WS، ریورس تانل را برقرار میکنید یا با TLS
-- در این ریورس تانل ممکن است شما سرعت بالایی در اسپید تست نگیرید اما من مشکلی در یوتیوب و اینستاگرام با ایپی کاملا فیلتر شده نداشتم.
 - **حدودا پنج ثانیه طول میکشد که ارتباط شما با تانل برقرار شود مخصوصا در کلاینت وایرگارد** (در کلاینت وایرگارد، حدودا 5 ثانیه طول میکشد تا ارتباط شما برای بار اول برقرار شود)
 - از TCP و UDP پشتیبانی میکند.
 - ریست تایمر برای سرویس های خود را بر اساس نیاز خودتان تعیین کنید.
@@ -20,26 +37,17 @@
 - اگر به هر دلیلی نتوانستید برای ساب دامین خود cert بگیرید به صورت دستی با acme اینکار را انجام دهید و سپس قسمت cert در اسکریپت را skip کنید.
 - اگر اختلالی در تانل داشتید همیشه وارد مسیر روبرو شوید cd /etc/systemd/system و با دستور ls ، سرویس های خارج و ایران را بیابید و با دستور systemctl status servicename و یا journalctl -u servicename.service ، دلیل اختلال تانل را بیابید
 
+  </details>
+</div>
 
 ------------------------
 
-![307981](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/39b2794b-fd04-4ae5-baea-d4b66138766e)
- **فهرست :**
- ----------------------
- - **دسترسی سریع به اسکریپت** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%85%D9%86)**
-- **نصب go به صورت دستی یا با اسکریپت** >> [کلیک](https://github.com/Azumi67/Reverse_tls/blob/main/README.md#%D8%A7%D9%85%D9%88%D8%B2%D8%B4-%D9%86%D8%B5%D8%A8-go-%D9%85%D9%88%D8%B1%D8%AF-%D9%86%DB%8C%D8%A7%D8%B2-%D8%A8%D8%B1%D8%A7%DB%8C-%D8%A7%D8%AC%D8%B1%D8%A7%DB%8C-%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA)
-- **امکانات** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D9%85%DA%A9%D8%A7%D9%86%D8%A7%D8%AA)
-- ** تانل ریورس WS ایپی 4 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-tcp)**
-- **تانل ریورس WS ایپی 6 [TCP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-6-tcp)
-- **تانل ریورس WS ایپی 4 [UDP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-4-udp)
-- **تانل ریورس WS ایپی 6 [UDP]** >> **[کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-ws-%D8%A7%DB%8C%D9%BE%DB%8C-6-udp)
-- **تانل ریورس TLS با ساب دامین [TCP]** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-tls-%D8%A8%D8%A7-%D8%B3%D8%A7%D8%A8-%D8%AF%D8%A7%D9%85%DB%8C%D9%86-tcp)
-- **تانل ریورس TLS با ساب دامین [UDP]** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%AA%D8%A7%D9%86%D9%84-%D8%B1%DB%8C%D9%88%D8%B1%D8%B3-tls-%D8%A8%D8%A7-%D8%B3%D8%A7%D8%A8-%D8%AF%D8%A7%D9%85%DB%8C%D9%86-udp)
-- **اسکریپت های کارآمد** >> [کلیک](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%87%D8%A7%DB%8C-%DA%A9%D8%A7%D8%B1%D8%A2%D9%85%D8%AF-)
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/UDP2RAW_FEC/assets/119934376/71b80a34-9515-42de-8238-9065986104a1" alt="Image"> اموزش نصب go مورد نیاز برای اجرای اسکریپت</strong></summary>
+  
+------------------------------------ 
 
---------------
-![Go_(programming_language)-Logo wine](https://github.com/Azumi67/UDP2RAW_FEC/assets/119934376/71b80a34-9515-42de-8238-9065986104a1)**اموزش نصب go مورد نیاز برای اجرای اسکریپت**
--
 - شما میتوانید از طریق اسکریپت [Here](https://github.com/Azumi67/Reverse_tls/tree/main#%D8%A7%D8%B3%DA%A9%D8%B1%DB%8C%D9%BE%D8%AA-%D9%85%D9%86) ، این پیش نیاز را نصب کنید یا به صورت دستی نصب نمایید.
 - حتما در صورت مشکل دانلود، dns های خود را تغییر دهید.
 - پس از نصب پیش نیاز ، اجرای اسکریپت go برای بار اول، ممکن است تا 10 ثانیه طول بکشد اما بعد از آن سریع اجرا میشود.
@@ -63,37 +71,31 @@ go get github.com/fatih/color
 
 ```
 - سپس اسکریپت را میتوانید اجرا نمایید.
+  </details>
+</div>
+
 ------------------
-![check](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/13de8d36-dcfe-498b-9d99-440049c0cf14)
-**امکانات**
--
-
-- پشتیبانی از TCP و UDP
-- قابلیت تانل بر روی چندین پورت
-- امکان استفاده از ایپی 4 و 6
-- ریست تایمر انتخابی توسط شما
-- امکان استفاده از ساب دامین در ریورس تانل ( باید برایش cert گرفته شود)
-- امکان استفاده از چند سرور خارج و یک سرور ایران
-- امکان حذف تمامی تانل ها و سرویس ها
-
- ------------------------------------------------------
 
 ![147-1472495_no-requirements-icon-vector-graphics-clipart](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/98d8c2bd-c9d2-4ecf-8db9-246b90e1ef0f)
  **پیش نیازها**
 
  - لطفا سرور اپدیت شده باشه.
- - میتوانید از اسکریپت اقای [Hwashemi](https://github.com/hawshemi/Linux-Optimizer) و یا [OPIRAN](https://github.com/opiran-club/VPS-Optimizer) هم برای بهینه سازی سرور در صورت تمایل استفاده نمایید. (پیش نیاز نیست)
+ - میتوانید از اسکریپت اقای [Hwashemi](https://github.com/hawshemi/Linux-Optimizer) و یا [OPIRAN](https://github.com/opiran-club/VPS-Optimizer) هم برای بهینه سازی سرور در صورت تمایل استفاده نمایید.
 
 
 ----------------------------
-
-  
   ![6348248](https://github.com/Azumi67/PrivateIP-Tunnel/assets/119934376/398f8b07-65be-472e-9821-631f7b70f783)
 **آموزش**
 -
-![OIP2 (1)](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/3ec2f05f-3308-4441-8cce-62ab4776f4e2)
-**تانل ریورس WS ایپی 4** [TCP]
-----------------------------------
+
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/Rathole_reverseTunnel/assets/119934376/fcbbdc62-2de5-48aa-bbdd-e323e96a62b5" alt="Image"> </strong>تانل ریورس WS ایپی 4 [TCP]</summary>
+  
+  
+------------------------------------ 
+
+
 ![green-dot-clipart-3](https://github.com/Azumi67/6TO4-PrivateIP/assets/119934376/902a2efa-f48f-4048-bc2a-5be12143bef3) **سرور ایران**
 
 **مسیر : WS TCP > IPV4 > IRAN**
@@ -156,10 +158,17 @@ go get github.com/fatih/color
 - ریست تایمر هم که عدد 2 را وارد کرده بودیم. ( باید ریست تایمر یکسان باشد که همه سرویس ها همزمان ریست شوند)
 
 
---------------------------------------
-![OIP2 (1)](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/3ec2f05f-3308-4441-8cce-62ab4776f4e2)
-**تانل ریورس WS ایپی 6** [TCP]
--
+  </details>
+</div>
+
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/Rathole_reverseTunnel/assets/119934376/fcbbdc62-2de5-48aa-bbdd-e323e96a62b5" alt="Image"> </strong>تانل ریورس WS ایپی 6 [TCP]</summary>
+  
+  
+------------------------------------ 
+
+
 ![green-dot-clipart-3](https://github.com/Azumi67/6TO4-PrivateIP/assets/119934376/902a2efa-f48f-4048-bc2a-5be12143bef3) **سرور ایران**
 
 **مسیر : WS TCP > IPV6 > IRAN**
@@ -221,11 +230,17 @@ go get github.com/fatih/color
 - پورت های کانفیگ سرور دوم خارج 8082 و 8083 بود پس اینگونه وارد میکنم : 8082,8083
 - ریست تایمر هم که عدد 2 را وارد کرده بودیم. ( باید ریست تایمر یکسان باشد که همه سرویس ها همزمان ریست شوند)
 
+  </details>
+</div>
 
---------------------------------------
-![OIP2 (1)](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/3ec2f05f-3308-4441-8cce-62ab4776f4e2)
-**تانل ریورس WS ایپی 4** [UDP]
--
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/Rathole_reverseTunnel/assets/119934376/fcbbdc62-2de5-48aa-bbdd-e323e96a62b5" alt="Image"> </strong>تانل ریورس WS ایپی 4 [UDP]</summary>
+  
+  
+------------------------------------ 
+
+
 ![green-dot-clipart-3](https://github.com/Azumi67/6TO4-PrivateIP/assets/119934376/902a2efa-f48f-4048-bc2a-5be12143bef3) **سرور ایران**
 
 **مسیر : WS UDP > IPV4 > IRAN**
@@ -262,12 +277,17 @@ go get github.com/fatih/color
 - کلیدی که برای سرور خارج GENERATE شده بود را اینجا PASTE میکنم.
 - پورت کانفیگ سرور  خارج 50820 بود پس اینگونه وارد میکنم : 50820
 - ریست تایمر هم که عدد 2 را وارد کرده بودیم. ( باید ریست تایمر یکسان باشد که همه سرویس ها همزمان ریست شوند)
+  </details>
+</div>
+
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/Rathole_reverseTunnel/assets/119934376/fcbbdc62-2de5-48aa-bbdd-e323e96a62b5" alt="Image"> </strong>تانل ریورس WS ایپی 6 [UDP]</summary>
+  
+  
+------------------------------------ 
 
 
---------------------------------------
-![OIP2 (1)](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/3ec2f05f-3308-4441-8cce-62ab4776f4e2)
-**تانل ریورس WS ایپی 6** [UDP]
--
 ![green-dot-clipart-3](https://github.com/Azumi67/6TO4-PrivateIP/assets/119934376/902a2efa-f48f-4048-bc2a-5be12143bef3) **سرور ایران**
 
 **مسیر : WS UDP > IPV6 > IRAN**
@@ -305,10 +325,17 @@ go get github.com/fatih/color
 - پورت کانفیگ سرور  خارج 50820 بود پس اینگونه وارد میکنم : 50820
 - ریست تایمر هم که عدد 2 را وارد کرده بودیم. ( باید ریست تایمر یکسان باشد که همه سرویس ها همزمان ریست شوند)
 
-----------------------------------
-![OIP2 (1)](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/3ec2f05f-3308-4441-8cce-62ab4776f4e2)
-**تانل ریورس TLS با ساب دامین** [TCP]
--
+
+  </details>
+</div>
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/Rathole_reverseTunnel/assets/119934376/fcbbdc62-2de5-48aa-bbdd-e323e96a62b5" alt="Image"> </strong>تانل ریورس TLS با ساب دامین [TCP]</summary>
+  
+  
+------------------------------------ 
+
+
 ![green-dot-clipart-3](https://github.com/Azumi67/6TO4-PrivateIP/assets/119934376/902a2efa-f48f-4048-bc2a-5be12143bef3) **سرور ایران**
 
 **مسیر : WSS TCP > IRAN**
@@ -372,10 +399,17 @@ go get github.com/fatih/color
 - پورت کانفیگ سرور دوم خارج، 8082 و 8083 بود. در اینجا پورت ها را جداگانه وارد میکنم.
 - ریست تایمر هم که عدد 2 را وارد کرده بودیم. ( باید ریست تایمر یکسان باشد که همه سرویس ها همزمان ریست شوند)
 
---------------------------------------
-![OIP2 (1)](https://github.com/Azumi67/V2ray_loadbalance_multipleServers/assets/119934376/3ec2f05f-3308-4441-8cce-62ab4776f4e2)
-**تانل ریورس TLS با ساب دامین** [UDP]
--
+  </details>
+</div>
+
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/Rathole_reverseTunnel/assets/119934376/fcbbdc62-2de5-48aa-bbdd-e323e96a62b5" alt="Image"> </strong>تانل ریورس TLS با ساب دامین [UDP]</summary>
+  
+  
+------------------------------------ 
+
+
 ![green-dot-clipart-3](https://github.com/Azumi67/6TO4-PrivateIP/assets/119934376/902a2efa-f48f-4048-bc2a-5be12143bef3) **سرور ایران**
 
 **مسیر : WSS UDP > IRAN**
@@ -415,6 +449,9 @@ go get github.com/fatih/color
 - ریست تایمر هم که عدد 2 را وارد کرده بودیم. ( باید ریست تایمر یکسان باشد که همه سرویس ها همزمان ریست شوند)
 - دقت نمایید که ممکن است برای بار اول تا 5 ثانیه طول بکشد تا ارتباط شما با تانل برقرار شود.
 
+  </details>
+</div>
+
 --------------------------------------
 
 **اسکرین شات**
@@ -424,7 +461,7 @@ go get github.com/fatih/color
   <summary align="right">Click to reveal image</summary>
   
   <p align="right">
-    <img src="https://github.com/Azumi67/Reverse_tls/assets/119934376/51e4bfe2-ba58-42b3-91c9-4ca1237f86a1" alt="menu screen" />
+    <img src="https://github.com/Azumi67/Reverse_tls/assets/119934376/e2fb4086-c2f2-41dd-8151-90f0e5585060" alt="menu screen" />
   </p>
 </details>
 
@@ -481,8 +518,3 @@ sudo apt install wget -y && wget https://raw.githubusercontent.com/Azumi67/Rever
 
 
 -----------------------------------------------------
-
-![youtube-131994968075841675](https://github.com/Azumi67/FRP-V2ray-Loadbalance/assets/119934376/24202a92-aff2-4079-a6c2-9db14cd0ecd1)
-**ویدیوی آموزش**
-
------------------------------------------

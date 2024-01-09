@@ -214,7 +214,7 @@ func rmv() error {
 }
 func deleteCron() {
 	entriesToDelete := []string{
-		"0 */1 * * * /etc/tls.sh",
+		"0 * * * * /etc/tls.sh",
 		"0 */2 * * * /etc/tls.sh",
 		"0 */3 * * * /etc/tls.sh",
 		"0 */4 * * * /etc/tls.sh",
@@ -305,7 +305,12 @@ func resKharej() {
 		log.Fatalf("\033[91mInvalid input for reset timer:\033[0m %v", err)
 	}
 
-	cronEntry := fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+	var cronEntry string
+	if hours == 1 {
+		cronEntry = "0 * * * * /etc/tls.sh"
+	} else if hours >= 2 {
+		cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+	}
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
@@ -384,7 +389,12 @@ func resIran() {
 		log.Fatalf("\033[91mInvalid input for reset timer:\033[0m %v", err)
 	}
 
-	cronEntry := fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+	var cronEntry string
+	if hours == 1 {
+		cronEntry = "0 * * * * /etc/tls.sh"
+	} else if hours >= 2 {
+		cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+	}
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {

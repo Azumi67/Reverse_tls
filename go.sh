@@ -4,6 +4,7 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 sudo apt update -y
+sudo apt-get install pkg-config libssl-dev -y
 wget -O /etc/logo.sh https://raw.githubusercontent.com/Azumi67/UDP2RAW_FEC/main/logo.sh
 chmod +x /etc/logo.sh
 

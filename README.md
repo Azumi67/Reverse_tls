@@ -42,6 +42,21 @@
 </div>
 
 ------------------------
+ <div align="right">
+  <details>
+    <summary><strong><img src="https://github.com/Azumi67/FRP_Reverse_Loadbalance/assets/119934376/ae5b07b8-4d5e-4302-a31f-dec2a79a76b5" alt="Image"> ویدیوهای آموزشی</strong></summary>
+------------------------------------   
+  
+- **ویدیوی آموزشی توسط 69**
+<div align="right">
+  <a href="https://www.youtube.com/watch?v=K1Qt4aBNrIE">
+    <img src="https://img.youtube.com/vi/K1Qt4aBNrIE/0.jpg" alt="Video Title" width="300">
+  </a>
+</div>
+  </details>
+</div>
+
+---------------------------------
 
  <div align="right">
   <details>

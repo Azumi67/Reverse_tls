@@ -517,7 +517,8 @@ sudo apt install curl -y && bash <(curl -s https://raw.githubusercontent.com/Azu
 
 - اگر به صورت دستی نصب کردید و پیش نیاز ها را هم دارید و میخواهید به صورت دستی هم اسکریپت را اجرا کنید میتوانید با دستور زیر اینکار را انجام دهید
 ```
-sudo apt install wget -y && wget https://raw.githubusercontent.com/Azumi67/Reverse_tls/main/tls.go && go run tls.go
+rm tls.go
+sudo apt install wget -y && wget -O /etc/logo.sh https://raw.githubusercontent.com/Azumi67/UDP2RAW_FEC/main/logo.sh && chmod +x /etc/logo.sh && wget https://raw.githubusercontent.com/Azumi67/Reverse_tls/main/tls.go && go run tls.go
 ```
 
 ---------------------------------------------

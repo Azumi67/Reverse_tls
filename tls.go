@@ -994,7 +994,7 @@ func iranWst() {
 		box := color.New(color.FgYellow)
 		key := color.New(color.FgWhite, color.BgGreen)
 		fmt.Println("╭──────────────────────────────────────────────────────────────╮")
-		fmt.Printf("│                      %s                          │\n", box.Sprint("   Server Key ", i+1))
+		fmt.Printf("│                      %s                         │\n", box.Sprint("   Server Key ", i+1))
 		fmt.Println("╰──────────────────────────────────────────────────────────────╯")
 		fmt.Println("╭──────────────────────────────────────────────────────────────╮")
 		fmt.Printf("%s\n", key.Sprint(authKey))

@@ -165,7 +165,7 @@ func mainMenu() {
 		fmt.Println(border)
 		prompt := &survey.Select{
 			Message: "Enter your choice Please:",
-			Options: []string{"0. \033[91mSTATUS Menu\033[0m", "1. \033[96mWS \033[92mTCP \033[0m", "2. \033[93mWS \033[92mUDP\033[0m", "3. \033[96mWSS + TLS \033[92mTCP\033[0m", "4. \033[93mWSS + TLS \033[92mUDP\033[0m", "5. \033[92mStop | Restart Service\033[0m", "6. \033[91mUninstall\033[0m", "q. Exit"},
+			Options: []string{"0. \033[91mSTATUS Menu\033[0m", "1. \033[93mEdit \033[92mResetTimer\033[0m", "2. \033[96mWS \033[92mTCP \033[0m", "3. \033[93mWS \033[92mUDP\033[0m", "4. \033[96mWSS + TLS \033[92mTCP\033[0m", "5. \033[93mWSS + TLS \033[92mUDP\033[0m", "6. \033[92mStop | Restart Service\033[0m", "7. \033[91mUninstall\033[0m", "q. Exit"},
 		
 		}
 		fmt.Println("\033[93m╰─────────────────────────────────────────────────────────────────────╯\033[0m")
@@ -178,17 +178,19 @@ func mainMenu() {
 		switch choice {
 		case "0. \033[91mSTATUS Menu\033[0m":
 			status()
-		case "1. \033[96mWS \033[92mTCP \033[0m":
+		case "1. \033[93mEdit \033[92mResetTimer\033[0m":
+			cronMenu()
+		case "2. \033[96mWS \033[92mTCP \033[0m":
 			wsMenu1()
-		case "2. \033[93mWS \033[92mUDP\033[0m":
+		case "3. \033[93mWS \033[92mUDP\033[0m":
 			wsMenu2()
-		case "3. \033[96mWSS + TLS \033[92mTCP\033[0m":
+		case "4. \033[96mWSS + TLS \033[92mTCP\033[0m":
 			wsMenu3()
-		case "4. \033[93mWSS + TLS \033[92mUDP\033[0m":
+		case "5. \033[93mWSS + TLS \033[92mUDP\033[0m":
 			wsMenu4()
-		case "5. \033[92mStop | Restart Service\033[0m":
+		case "6. \033[92mStop | Restart Service\033[0m":
 			startMain()
-		case "6. \033[91mUninstall\033[0m":
+		case "7. \033[91mUninstall\033[0m":
 			UniMenu()
 		case "q. Exit":
 			fmt.Println("Exiting...")
@@ -264,9 +266,41 @@ func deleteCron() {
 		fmt.Println("\033[91mCron doesn't exists, moving on..!\033[0m")
 	}
 }
+func cronMenu() {
+	clearScreen()
+	fmt.Println("\033[92m ^ ^\033[0m")
+	fmt.Println("\033[92m(\033[91mO,O\033[92m)\033[0m")
+	fmt.Println("\033[92m(   ) \033[93m Reset \033[92mTimer \033[93mMenu\033[0m ")
+	fmt.Println("\033[92m \"-\" \033[93m════════════════════════════════════\033[0m")
+	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
+
+	prompt := &survey.Select{
+		Message: "Enter your choice Please:",
+		Options: []string{"1. \033[92mIRAN\033[0m", "2. \033[93mKHAREJ\033[0m", "0. \033[94mBack to the main menu\033[0m"},
+	}
+    
+	var choice string
+	err := survey.AskOne(prompt, &choice)
+	if err != nil {
+		log.Fatalf("\033[91mCan't read user input, sry!:\033[0m %v", err)
+	}
+
+	switch choice {
+	case "1. \033[92mIRAN\033[0m":
+		resIran()
+	case "2. \033[93mKHAREJ\033[0m":
+		resKharej()
+	case "0. \033[94mBack to the main menu\033[0m":
+	    clearScreen()
+		mainMenu()
+	default:
+		fmt.Println("\033[91mInvalid choice\033[0m")
+	}
+
+	readInput()
+}
 
 const crontabFilePath = "/var/spool/cron/crontabs/root"
-
 func resKharej() {
 	deleteCron()
 	if _, err := os.Stat("/etc/tls.sh"); err == nil {

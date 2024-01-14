@@ -214,6 +214,96 @@ func rmv() error {
 	}
 	return nil
 }
+func deleteCron2() {
+	entriesToDelete := []string{
+		"*/1 * * * * /etc/tls.sh",
+		"*/2 * * * * /etc/tls.sh",
+		"*/3 * * * * /etc/tls.sh",
+		"*/4 * * * * /etc/tls.sh",
+		"*/5 * * * * /etc/tls.sh",
+		"*/6 * * * * /etc/tls.sh",
+		"*/7 * * * * /etc/tls.sh",
+		"*/8 * * * * /etc/tls.sh",
+		"*/9 * * * * /etc/tls.sh",
+		"*/10 * * * * /etc/tls.sh",
+		"*/11 * * * * /etc/tls.sh",
+		"*/12 * * * * /etc/tls.sh",
+		"*/13 * * * * /etc/tls.sh",
+		"*/14 * * * * /etc/tls.sh",
+		"*/15 * * * * /etc/tls.sh",
+		"*/16 * * * * /etc/tls.sh",
+		"*/17 * * * * /etc/tls.sh",
+		"*/18 * * * * /etc/tls.sh",
+		"*/19 * * * * /etc/tls.sh",
+		"*/20 * * * * /etc/tls.sh",
+		"*/21 * * * * /etc/tls.sh",
+		"*/22 * * * * /etc/tls.sh",
+		"*/23 * * * * /etc/tls.sh",
+		"*/24 * * * * /etc/tls.sh",
+		"*/25 * * * * /etc/tls.sh",
+		"*/26 * * * * /etc/tls.sh",
+		"*/27 * * * * /etc/tls.sh",
+		"*/28 * * * * /etc/tls.sh",
+		"*/29 * * * * /etc/tls.sh",
+		"*/30 * * * * /etc/tls.sh",
+		"*/31 * * * * /etc/tls.sh",
+		"*/32 * * * * /etc/tls.sh",
+		"*/33 * * * * /etc/tls.sh",
+		"*/34 * * * * /etc/tls.sh",
+		"*/35 * * * * /etc/tls.sh",
+		"*/36 * * * * /etc/tls.sh",
+		"*/37 * * * * /etc/tls.sh",
+		"*/38 * * * * /etc/tls.sh",
+		"*/39 * * * * /etc/tls.sh",
+		"*/40 * * * * /etc/tls.sh",
+		"*/41 * * * * /etc/tls.sh",
+		"*/42 * * * * /etc/tls.sh",
+		"*/43 * * * * /etc/tls.sh",
+		"*/44 * * * * /etc/tls.sh",
+		"*/45 * * * * /etc/tls.sh",
+		"*/46 * * * * /etc/tls.sh",
+		"*/47 * * * * /etc/tls.sh",
+		"*/48 * * * * /etc/tls.sh",
+		"*/49 * * * * /etc/tls.sh",
+		"*/50 * * * * /etc/tls.sh",
+		"*/51 * * * * /etc/tls.sh",
+		"*/52 * * * * /etc/tls.sh",
+		"*/53 * * * * /etc/tls.sh",
+		"*/54 * * * * /etc/tls.sh",
+		"*/55 * * * * /etc/tls.sh",
+		"*/56 * * * * /etc/tls.sh",
+		"*/57 * * * * /etc/tls.sh",
+		"*/58 * * * * /etc/tls.sh",
+		"*/59 * * * * /etc/tls.sh",
+	}
+
+	existingCrontab, err := exec.Command("crontab", "-l").Output()
+	if err != nil {
+		fmt.Println("\033[91mNo existing cron found!\033[0m")
+		return
+	}
+
+	newCrontab := string(existingCrontab)
+	for _, entry := range entriesToDelete {
+		if strings.Contains(newCrontab, entry) {
+			newCrontab = strings.Replace(newCrontab, entry, "", -1)
+		}
+	}
+
+	if newCrontab != string(existingCrontab) {
+		cmd := exec.Command("crontab")
+		cmd.Stdin = strings.NewReader(newCrontab)
+
+		_, err = cmd.CombinedOutput()
+        if err != nil {
+            fmt.Printf("\033[91mfailed to delete some cron entries. don't worry about it \033[0m\n")
+		} else {
+			displayNotification("\033[92mDeleting Previous Crons..\033[0m")
+		}
+	} else {
+		fmt.Println("\033[91mCron doesn't exist, moving on..!\033[0m")
+	}
+}
 func deleteCron() {
 	entriesToDelete := []string{
 		"0 * * * * /etc/tls.sh",
@@ -239,12 +329,11 @@ func deleteCron() {
 		"0 */21 * * * /etc/tls.sh",
 		"0 */22 * * * /etc/tls.sh",
 		"0 */23 * * * /etc/tls.sh",
-		"0 */24 * * * /etc/tls.sh",
 	}
 
 	existingCrontab, err := exec.Command("crontab", "-l").Output()
 	if err != nil {
-		displayError("\033[91mNo existing cron found!\033[0m")
+		fmt.Println("\033[91mNo existing cron found!\033[0m")
 		return
 	}
 
@@ -258,12 +347,15 @@ func deleteCron() {
 	if newCrontab != string(existingCrontab) {
 		cmd := exec.Command("crontab")
 		cmd.Stdin = strings.NewReader(newCrontab)
-		if err := cmd.Run(); err != nil {
-			log.Fatal(err)
+
+		_, err = cmd.CombinedOutput()
+        if err != nil {
+            fmt.Printf("\033[91mfailed to delete some cron entries. don't worry about it \033[0m\n")
+		} else {
+			displayNotification("\033[92mDeleting Previous Crons..\033[0m")
 		}
-		displayNotification("\033[92mDeleting Previous Crons..\033[0m")
 	} else {
-		fmt.Println("\033[91mCron doesn't exists, moving on..!\033[0m")
+		fmt.Println("\033[91mCron doesn't exist, moving on..!\033[0m")
 	}
 }
 func cronMenu() {
@@ -276,7 +368,7 @@ func cronMenu() {
 
 	prompt := &survey.Select{
 		Message: "Enter your choice Please:",
-		Options: []string{"1. \033[92mIRAN\033[0m", "2. \033[93mKHAREJ\033[0m", "0. \033[94mBack to the main menu\033[0m"},
+		Options: []string{"1. \033[92mHours\033[0m", "2. \033[93mMinutes\033[0m", "0. \033[94mBack to the main menu\033[0m"},
 	}
     
 	var choice string
@@ -286,10 +378,10 @@ func cronMenu() {
 	}
 
 	switch choice {
-	case "1. \033[92mIRAN\033[0m":
-		resIran()
-	case "2. \033[93mKHAREJ\033[0m":
-		resKharej()
+	case "1. \033[92mHours\033[0m":
+		resHourz()
+	case "2. \033[93mMinutes\033[0m":
+		resMins()
 	case "0. \033[94mBack to the main menu\033[0m":
 	    clearScreen()
 		mainMenu()
@@ -298,6 +390,132 @@ func cronMenu() {
 	}
 
 	readInput()
+}
+func resHourz() {
+	deleteCron()
+	deleteCron2()
+    
+	fmt.Println("╭──────────────────────────────────────╮")
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("\033[93mEnter \033[92mReset timer\033[93m (hours):\033[0m ")
+	hoursStr, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatalf("Error reading input: %v", err)
+	}
+	hoursStr = strings.TrimSpace(hoursStr)
+	fmt.Println("╰──────────────────────────────────────╯")
+
+	hours, err := strconv.Atoi(hoursStr)
+	if err != nil {
+		log.Fatalf("\033[91mInvalid input for reset timer:\033[0m %v", err)
+	}
+
+	var cronEntry string
+	if hours == 1 {
+		cronEntry = "0 * * * * /etc/tls.sh"
+	} else if hours >= 2 {
+		cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+	}
+
+	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
+	if err != nil {
+		log.Fatalf("\033[91mCouldn't open Cron:\033[0m %v", err)
+	}
+	defer crontabFile.Close()
+
+	var crontabContent strings.Builder
+	scanner := bufio.NewScanner(crontabFile)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if line == cronEntry {
+			fmt.Println("\033[92mOh... Cron entry already exists!\033[0m")
+			return
+		}
+		crontabContent.WriteString(line)
+		crontabContent.WriteString("\n")
+	}
+
+	crontabContent.WriteString(cronEntry)
+	crontabContent.WriteString("\n")
+
+	if err := scanner.Err(); err != nil {
+		log.Fatalf("\033[91mcrontab Reading error:\033[0m %v", err)
+	}
+
+	if err := crontabFile.Truncate(0); err != nil {
+		log.Fatalf("\033[91mcouldn't truncate cron file:\033[0m %v", err)
+	}
+
+	if _, err := crontabFile.Seek(0, 0); err != nil {
+		log.Fatalf("\033[91mcouldn't find cron file: \033[0m%v", err)
+	}
+
+	if _, err := crontabFile.WriteString(crontabContent.String()); err != nil {
+		log.Fatalf("\033[91mCouldn't write cron file:\033[0m %v", err)
+	}
+
+	fmt.Println("\033[92mCron entry added successfully!\033[0m")
+}
+
+func resMins() {
+	deleteCron()
+	deleteCron2()
+
+	fmt.Println("╭──────────────────────────────────────╮")
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("\033[93mEnter \033[92mReset timer\033[93m (minutes):\033[0m ")
+	minutesStr, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatalf("Error reading input: %v", err)
+	}
+	minutesStr = strings.TrimSpace(minutesStr)
+	fmt.Println("╰──────────────────────────────────────╯")
+
+	minutes, err := strconv.Atoi(minutesStr)
+	if err != nil {
+		log.Fatalf("\033[91mInvalid input for reset timer:\033[0m %v", err)
+	}
+
+	cronEntry := fmt.Sprintf("*/%d * * * * /etc/tls.sh", minutes)
+
+	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
+	if err != nil {
+		log.Fatalf("\033[91mCouldn't open Cron:\033[0m %v", err)
+	}
+	defer crontabFile.Close()
+
+	var crontabContent strings.Builder
+	scanner := bufio.NewScanner(crontabFile)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if line == cronEntry {
+			fmt.Println("\033[92mOh... Cron entry already exists!\033[0m")
+			return
+		}
+		crontabContent.WriteString(line)
+		crontabContent.WriteString("\n")
+	}
+
+	crontabContent.WriteString(cronEntry)
+	crontabContent.WriteString("\n")
+
+	if err := scanner.Err(); err != nil {
+		log.Fatalf("\033[91mcrontab Reading error:\033[0m %v", err)
+	}
+
+	if err := crontabFile.Truncate(0); err != nil {
+		log.Fatalf("\033[91mcouldn't truncate cron file:\033[0m %v", err)
+	}
+
+	if _, err := crontabFile.Seek(0, 0); err != nil {
+		log.Fatalf("\033[91mcouldn't find cron file: \033[0m%v", err)
+	}
+
+	if _, err := crontabFile.WriteString(crontabContent.String()); err != nil {
+		log.Fatalf("\033[91mCouldn't write cron file:\033[0m %v", err)
+	}
+
+	fmt.Println("\033[92mCron entry added successfully!\033[0m")
 }
 
 const crontabFilePath = "/var/spool/cron/crontabs/root"
@@ -747,6 +965,7 @@ func removews() {
 	displayNotification("\033[93mRemoving Config ..\033[0m")
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
 	deleteCron()
+	deleteCron2()
 	rmv()
 
 

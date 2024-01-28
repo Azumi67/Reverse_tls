@@ -521,6 +521,8 @@ func resMins() {
 const crontabFilePath = "/var/spool/cron/crontabs/root"
 func resKharej() {
 	deleteCron()
+	deleteCron2()
+
 	if _, err := os.Stat("/etc/tls.sh"); err == nil {
 		os.Remove("/etc/tls.sh")
 	}
@@ -535,7 +537,7 @@ func resKharej() {
 	file.WriteString("sudo systemctl daemon-reload\n")
 	file.WriteString("sudo kill -9 $(pgrep rtun-client)\n")
 	file.WriteString("sudo systemctl restart rtun-kharej\n")
-        file.WriteString("sudo journalctl --vacuum-size=1M\n")
+	file.WriteString("sudo journalctl --vacuum-size=1M\n")
 
 	cmd := exec.Command("chmod", "+x", "/etc/tls.sh")
 	if err := cmd.Run(); err != nil {
@@ -544,24 +546,48 @@ func resKharej() {
 
 	fmt.Println("╭──────────────────────────────────────╮")
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("\033[93mEnter \033[92mReset timer\033[93m (hours):\033[0m ")
-	hoursStr, err := reader.ReadString('\n')
+	fmt.Print("\033[93mChoose an option:\n1. \033[96mReset timer \033[92m(hours)\033[93m\n2. \033[96mReset timer \033[92m(minutes)\n\033[0m")
+	optionStr, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatalf("Error reading input: %v", err)
 	}
-	hoursStr = strings.TrimSpace(hoursStr)
+	optionStr = strings.TrimSpace(optionStr)
 	fmt.Println("╰──────────────────────────────────────╯")
 
-	hours, err := strconv.Atoi(hoursStr)
-	if err != nil {
-		log.Fatalf("\033[91mInvalid input for reset timer:\033[0m %v", err)
+	option, err := strconv.Atoi(optionStr)
+	if err != nil || (option != 1 && option != 2) {
+		log.Fatalf("\033[91mInvalid input for option:\033[0m %v", err)
 	}
 
+	var timeUnit string
 	var cronEntry string
-	if hours == 1 {
-		cronEntry = "0 * * * * /etc/tls.sh"
-	} else if hours >= 2 {
-		cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+
+	if option == 1 {
+		timeUnit = "hours"
+	} else if option == 2 {
+		timeUnit = "minutes"
+	}
+
+	fmt.Printf("\033[93mEnter reset time (%s):\033[0m ", timeUnit)
+	timeStr, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatalf("Error reading input: %v", err)
+	}
+	timeStr = strings.TrimSpace(timeStr)
+
+	timeValue, err := strconv.Atoi(timeStr)
+	if err != nil {
+		log.Fatalf("\033[91mInvalid input for reset time:\033[0m %v", err)
+	}
+
+	if option == 1 {
+		if timeValue == 1 {
+			cronEntry = "0 * * * * /etc/tls.sh"
+		} else if timeValue >= 2 {
+			cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", timeValue)
+		}
+	} else if option == 2 {
+		cronEntry = fmt.Sprintf("*/%d * * * * /etc/tls.sh", timeValue)
 	}
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
@@ -575,7 +601,7 @@ func resKharej() {
 	for scanner.Scan() {
 		line := scanner.Text()
 		if line == cronEntry {
-			fmt.Println("\033[92mOh .. Cron entry already exists!\033[0m")
+			fmt.Println("\033[92mOh... Cron entry already exists!\033[0m")
 			return
 		}
 		crontabContent.WriteString(line)
@@ -605,6 +631,7 @@ func resKharej() {
 }
 func resIran() {
 	deleteCron()
+	deleteCron2()
 	if _, err := os.Stat("/etc/tls.sh"); err == nil {
 		os.Remove("/etc/tls.sh")
 	}
@@ -628,24 +655,48 @@ func resIran() {
 
 	fmt.Println("╭──────────────────────────────────────╮")
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("\033[93mEnter \033[92mReset timer\033[93m (hours):\033[0m ")
-	hoursStr, err := reader.ReadString('\n')
+	fmt.Print("\033[93mChoose an option:\n1. \033[96mReset timer \033[92m(hours)\033[93m\n2. \033[96mReset timer \033[92m(minutes)\n\033[0m")
+	optionStr, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatalf("Error reading input: %v", err)
 	}
-	hoursStr = strings.TrimSpace(hoursStr)
+	optionStr = strings.TrimSpace(optionStr)
 	fmt.Println("╰──────────────────────────────────────╯")
 
-	hours, err := strconv.Atoi(hoursStr)
-	if err != nil {
-		log.Fatalf("\033[91mInvalid input for reset timer:\033[0m %v", err)
+	option, err := strconv.Atoi(optionStr)
+	if err != nil || (option != 1 && option != 2) {
+		log.Fatalf("\033[91mInvalid input for option:\033[0m %v", err)
 	}
 
+	var timeUnit string
 	var cronEntry string
-	if hours == 1 {
-		cronEntry = "0 * * * * /etc/tls.sh"
-	} else if hours >= 2 {
-		cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+
+	if option == 1 {
+		timeUnit = "hours"
+	} else if option == 2 {
+		timeUnit = "minutes"
+	}
+
+	fmt.Printf("\033[93mEnter reset time (%s):\033[0m ", timeUnit)
+	timeStr, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatalf("Error reading input: %v", err)
+	}
+	timeStr = strings.TrimSpace(timeStr)
+
+	timeValue, err := strconv.Atoi(timeStr)
+	if err != nil {
+		log.Fatalf("\033[91mInvalid input for reset time:\033[0m %v", err)
+	}
+
+	if option == 1 {
+		if timeValue == 1 {
+			cronEntry = "0 * * * * /etc/tls.sh"
+		} else if timeValue >= 2 {
+			cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", timeValue)
+		}
+	} else if option == 2 {
+		cronEntry = fmt.Sprintf("*/%d * * * * /etc/tls.sh", timeValue)
 	}
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
@@ -659,7 +710,7 @@ func resIran() {
 	for scanner.Scan() {
 		line := scanner.Text()
 		if line == cronEntry {
-			fmt.Println("\033[92mOh .. Cron entry already exists!\033[0m")
+			fmt.Println("\033[92mOh... Cron entry already exists!\033[0m")
 			return
 		}
 		crontabContent.WriteString(line)

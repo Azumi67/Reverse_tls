@@ -210,11 +210,101 @@ func rmv() error {
 		if err != nil {
 			return fmt.Errorf("\033[91mbash file doesn't exists:\033[0m %v", err)
 		}
-		fmt.Println("\033[91mbash file removed successfully!\033[0m")
+		fmt.Println("\033[92mbash file removed successfully!\033[0m")
 	}
 	return nil
 }
 func deleteCron2() {
+	entriesToDelete := []string{
+		"*/1 * * * * /bin/bash /etc/tls.sh",
+		"*/2 * * * * /bin/bash /etc/tls.sh",
+		"*/3 * * * * /bin/bash /etc/tls.sh",
+		"*/4 * * * * /bin/bash /etc/tls.sh",
+		"*/5 * * * * /bin/bash /etc/tls.sh",
+		"*/6 * * * * /bin/bash /etc/tls.sh",
+		"*/7 * * * * /bin/bash /etc/tls.sh",
+		"*/8 * * * * /bin/bash /etc/tls.sh",
+		"*/9 * * * * /bin/bash /etc/tls.sh",
+		"*/10 * * * * /bin/bash /etc/tls.sh",
+		"*/11 * * * * /bin/bash /etc/tls.sh",
+		"*/12 * * * * /bin/bash /etc/tls.sh",
+		"*/13 * * * * /bin/bash /etc/tls.sh",
+		"*/14 * * * * /bin/bash /etc/tls.sh",
+		"*/15 * * * * /bin/bash /etc/tls.sh",
+		"*/16 * * * * /bin/bash /etc/tls.sh",
+		"*/17 * * * * /bin/bash /etc/tls.sh",
+		"*/18 * * * * /bin/bash /etc/tls.sh",
+		"*/19 * * * * /bin/bash /etc/tls.sh",
+		"*/20 * * * * /bin/bash /etc/tls.sh",
+		"*/21 * * * * /bin/bash /etc/tls.sh",
+		"*/22 * * * * /bin/bash /etc/tls.sh",
+		"*/23 * * * * /bin/bash /etc/tls.sh",
+		"*/24 * * * * /bin/bash /etc/tls.sh",
+		"*/25 * * * * /bin/bash /etc/tls.sh",
+		"*/26 * * * * /bin/bash /etc/tls.sh",
+		"*/27 * * * * /bin/bash /etc/tls.sh",
+		"*/28 * * * * /bin/bash /etc/tls.sh",
+		"*/29 * * * * /bin/bash /etc/tls.sh",
+		"*/30 * * * * /bin/bash /etc/tls.sh",
+		"*/31 * * * * /bin/bash /etc/tls.sh",
+		"*/32 * * * * /bin/bash /etc/tls.sh",
+		"*/33 * * * * /bin/bash /etc/tls.sh",
+		"*/34 * * * * /bin/bash /etc/tls.sh",
+		"*/35 * * * * /bin/bash /etc/tls.sh",
+		"*/36 * * * * /bin/bash /etc/tls.sh",
+		"*/37 * * * * /bin/bash /etc/tls.sh",
+		"*/38 * * * * /bin/bash /etc/tls.sh",
+		"*/39 * * * * /bin/bash /etc/tls.sh",
+		"*/40 * * * * /bin/bash /etc/tls.sh",
+		"*/41 * * * * /bin/bash /etc/tls.sh",
+		"*/42 * * * * /bin/bash /etc/tls.sh",
+		"*/43 * * * * /bin/bash /etc/tls.sh",
+		"*/44 * * * * /bin/bash /etc/tls.sh",
+		"*/45 * * * * /bin/bash /etc/tls.sh",
+		"*/46 * * * * /bin/bash /etc/tls.sh",
+		"*/47 * * * * /bin/bash /etc/tls.sh",
+		"*/48 * * * * /bin/bash /etc/tls.sh",
+		"*/49 * * * * /bin/bash /etc/tls.sh",
+		"*/50 * * * * /bin/bash /etc/tls.sh",
+		"*/51 * * * * /bin/bash /etc/tls.sh",
+		"*/52 * * * * /bin/bash /etc/tls.sh",
+		"*/53 * * * * /bin/bash /etc/tls.sh",
+		"*/54 * * * * /bin/bash /etc/tls.sh",
+		"*/55 * * * * /bin/bash /etc/tls.sh",
+		"*/56 * * * * /bin/bash /etc/tls.sh",
+		"*/57 * * * * /bin/bash /etc/tls.sh",
+		"*/58 * * * * /bin/bash /etc/tls.sh",
+		"*/59 * * * * /bin/bash /etc/tls.sh",
+	}
+
+	existingCrontab, err := exec.Command("crontab", "-l").Output()
+	if err != nil {
+		fmt.Println("\033[91mNo existing cron found!\033[0m")
+		return
+	}
+
+	newCrontab := string(existingCrontab)
+	for _, entry := range entriesToDelete {
+		if strings.Contains(newCrontab, entry) {
+			newCrontab = strings.Replace(newCrontab, entry, "", -1)
+		}
+	}
+
+	if newCrontab != string(existingCrontab) {
+		cmd := exec.Command("crontab")
+		cmd.Stdin = strings.NewReader(newCrontab)
+
+		_, err = cmd.CombinedOutput()
+        if err != nil {
+            fmt.Printf("\033[91mfailed to delete some cron entries. don't worry about it \033[0m\n")
+		} else {
+			displayNotification("\033[92mDeleting Previous Crons..\033[0m")
+		}
+	} else {
+		fmt.Println("\033[91mCron doesn't exist, moving on..!\033[0m")
+	}
+}
+func deleteCron4() {
 	entriesToDelete := []string{
 		"*/1 * * * * /etc/tls.sh",
 		"*/2 * * * * /etc/tls.sh",
@@ -304,7 +394,7 @@ func deleteCron2() {
 		fmt.Println("\033[91mCron doesn't exist, moving on..!\033[0m")
 	}
 }
-func deleteCron() {
+func deleteCron3() {
 	entriesToDelete := []string{
 		"0 * * * * /etc/tls.sh",
 		"0 */2 * * * /etc/tls.sh",
@@ -329,6 +419,60 @@ func deleteCron() {
 		"0 */21 * * * /etc/tls.sh",
 		"0 */22 * * * /etc/tls.sh",
 		"0 */23 * * * /etc/tls.sh",
+	}
+
+	existingCrontab, err := exec.Command("crontab", "-l").Output()
+	if err != nil {
+		fmt.Println("\033[91mNo existing cron found!\033[0m")
+		return
+	}
+
+	newCrontab := string(existingCrontab)
+	for _, entry := range entriesToDelete {
+		if strings.Contains(newCrontab, entry) {
+			newCrontab = strings.Replace(newCrontab, entry, "", -1)
+		}
+	}
+
+	if newCrontab != string(existingCrontab) {
+		cmd := exec.Command("crontab")
+		cmd.Stdin = strings.NewReader(newCrontab)
+
+		_, err = cmd.CombinedOutput()
+        if err != nil {
+            fmt.Printf("\033[91mfailed to delete some cron entries. don't worry about it \033[0m\n")
+		} else {
+			displayNotification("\033[92mDeleting Previous Crons..\033[0m")
+		}
+	} else {
+		fmt.Println("\033[91mCron doesn't exist, moving on..!\033[0m")
+	}
+}
+func deleteCron() {
+	entriesToDelete := []string{
+		"0 * * * * /bin/bash /etc/tls.sh",
+		"0 */2 * * * /bin/bash /etc/tls.sh",
+		"0 */3 * * * /bin/bash /etc/tls.sh",
+		"0 */4 * * * /bin/bash /etc/tls.sh",
+		"0 */5 * * * /bin/bash /etc/tls.sh",
+		"0 */6 * * * /bin/bash /etc/tls.sh",
+		"0 */7 * * * /bin/bash /etc/tls.sh",
+		"0 */8 * * * /bin/bash /etc/tls.sh",
+		"0 */9 * * * /bin/bash /etc/tls.sh",
+		"0 */10 * * * /bin/bash /etc/tls.sh",
+		"0 */11 * * * /bin/bash /etc/tls.sh",
+		"0 */12 * * * /bin/bash /etc/tls.sh",
+		"0 */13 * * * /bin/bash /etc/tls.sh",
+		"0 */14 * * * /bin/bash /etc/tls.sh",
+		"0 */15 * * * /bin/bash /etc/tls.sh",
+		"0 */16 * * * /bin/bash /etc/tls.sh",
+		"0 */17 * * * /bin/bash /etc/tls.sh",
+		"0 */18 * * * /bin/bash /etc/tls.sh",
+		"0 */19 * * * /bin/bash /etc/tls.sh",
+		"0 */20 * * * /bin/bash /etc/tls.sh",
+		"0 */21 * * * /bin/bash /etc/tls.sh",
+		"0 */22 * * * /bin/bash /etc/tls.sh",
+		"0 */23 * * * /bin/bash /etc/tls.sh",
 	}
 
 	existingCrontab, err := exec.Command("crontab", "-l").Output()
@@ -412,9 +556,9 @@ func resHourz() {
 
 	var cronEntry string
 	if hours == 1 {
-		cronEntry = "0 * * * * /etc/tls.sh"
+		cronEntry = "0 * * * * /bin/bash /etc/tls.sh"
 	} else if hours >= 2 {
-		cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", hours)
+		cronEntry = fmt.Sprintf("0 */%d * * * /bin/bash /etc/tls.sh", hours)
 	}
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
@@ -476,7 +620,7 @@ func resMins() {
 		log.Fatalf("\033[91mInvalid input for reset timer:\033[0m %v", err)
 	}
 
-	cronEntry := fmt.Sprintf("*/%d * * * * /etc/tls.sh", minutes)
+	cronEntry := fmt.Sprintf("*/%d * * * * /bin/bash /etc/tls.sh", minutes)
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
@@ -584,10 +728,10 @@ func resKharej() {
 		if timeValue == 1 {
 			cronEntry = "0 * * * * /etc/tls.sh"
 		} else if timeValue >= 2 {
-			cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", timeValue)
+			cronEntry = fmt.Sprintf("0 */%d * * * /bin/bash /etc/tls.sh", timeValue)
 		}
 	} else if option == 2 {
-		cronEntry = fmt.Sprintf("*/%d * * * * /etc/tls.sh", timeValue)
+		cronEntry = fmt.Sprintf("*/%d * * * * /bin/bash /etc/tls.sh", timeValue)
 	}
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
@@ -693,10 +837,10 @@ func resIran() {
 		if timeValue == 1 {
 			cronEntry = "0 * * * * /etc/tls.sh"
 		} else if timeValue >= 2 {
-			cronEntry = fmt.Sprintf("0 */%d * * * /etc/tls.sh", timeValue)
+			cronEntry = fmt.Sprintf("0 */%d * * * /bin/bash /etc/tls.sh", timeValue)
 		}
 	} else if option == 2 {
-		cronEntry = fmt.Sprintf("*/%d * * * * /etc/tls.sh", timeValue)
+		cronEntry = fmt.Sprintf("*/%d * * * * /bin/bash /etc/tls.sh", timeValue)
 	}
 
 	crontabFile, err := os.OpenFile(crontabFilePath, os.O_RDWR|os.O_CREATE, 0644)
@@ -1017,6 +1161,8 @@ func removews() {
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
 	deleteCron()
 	deleteCron2()
+	deleteCron3()
+	deleteCron4()
 	rmv()
 
 

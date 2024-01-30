@@ -679,7 +679,8 @@ func resKharej() {
 
 	file.WriteString("#!/bin/bash\n")
 	file.WriteString("sudo systemctl daemon-reload\n")
-	file.WriteString("sudo kill -9 $(pgrep rtun-client)\n")
+    file.WriteString("pids=$(pgrep rtun-client)\n")
+	file.WriteString("sudo kill -9 $pids\n")
 	file.WriteString("sudo systemctl restart rtun-kharej\n")
 	file.WriteString("sudo journalctl --vacuum-size=1M\n")
 
@@ -691,10 +692,12 @@ func resKharej() {
 	fmt.Println("╭──────────────────────────────────────╮")
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("\033[93mChoose an option:\n1. \033[96mReset timer \033[92m(hours)\033[93m\n2. \033[96mReset timer \033[92m(minutes)\n\033[0m")
+    fmt.Print("Choose option: ")
 	optionStr, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatalf("Error reading input: %v", err)
 	}
+    
 	optionStr = strings.TrimSpace(optionStr)
 	fmt.Println("╰──────────────────────────────────────╯")
 
@@ -786,11 +789,12 @@ func resIran() {
 	}
 	defer file.Close()
 
-	file.WriteString("#!/bin/bash\n")
-	file.WriteString("sudo systemctl daemon-reload\n")
-	file.WriteString("sudo kill -9 $(pgrep rtun-server)\n")
+    file.WriteString("#!/bin/bash\n")
+    file.WriteString("sudo systemctl daemon-reload\n")
+    file.WriteString("pids=$(pgrep rtun-server)\n")
+	file.WriteString("sudo kill -9 $pids\n")
 	file.WriteString("sudo systemctl restart rtun-iran\n")
-        file.WriteString("sudo journalctl --vacuum-size=1M\n")
+    file.WriteString("sudo journalctl --vacuum-size=1M\n")
 
 	cmd := exec.Command("chmod", "+x", "/etc/tls.sh")
 	if err := cmd.Run(); err != nil {
@@ -800,6 +804,7 @@ func resIran() {
 	fmt.Println("╭──────────────────────────────────────╮")
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("\033[93mChoose an option:\n1. \033[96mReset timer \033[92m(hours)\033[93m\n2. \033[96mReset timer \033[92m(minutes)\n\033[0m")
+    fmt.Print("Choose option: ")
 	optionStr, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatalf("Error reading input: %v", err)

@@ -20,6 +20,216 @@ import (
 	"net"
 	"io/ioutil"
 )
+func readInputs(reader *bufio.Reader) string {
+	input, _ := reader.ReadString('\n')
+	return strings.TrimSpace(input)
+}
+
+func enableResetKharej() {
+	deleteCron()
+	deleteCron2()
+	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
+	displayNotification("\033[93mQuestion time !\033[0m")
+	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("\033[93mDo you want to enable/edit \033[96mReverseTLS \033[92mreset time\033[93m? (\033[92myes\033[93m/\033[91mno\033[93m): \033[0m")
+	enableReset := readInputs(reader)
+
+	if enableReset == "yes" || enableReset == "y" {
+		fmt.Println("\033[93m╭───────────────────────────────────────╮\033[0m")
+		fmt.Println("1. \033[92mHour\033[0m")
+		fmt.Println("2. \033[93mMinute\033[0m")
+		fmt.Println("\033[93m╰───────────────────────────────────────╯\033[0m")
+
+		fmt.Print("\033[93mEnter your choice: \033[0m")
+		timeUnitChoice := readInputs(reader)
+
+		var timeUnit string
+		if timeUnitChoice == "1" {
+			timeUnit = "hour"
+		} else if timeUnitChoice == "2" {
+			timeUnit = "minute"
+		} else {
+			fmt.Println("\033[91mWrong choice\033[0m")
+			return
+		}
+
+		fmt.Print("\033[93mEnter the \033[92mdesired input\033[93m: \033[0m")
+		timeValue := readInputs(reader)
+		timeInt, err := strconv.Atoi(timeValue)
+		if err != nil {
+			fmt.Println("\033[91mInvalid input for time value\033[0m")
+			return
+		}
+
+		var intervalSeconds int
+		if timeUnit == "hour" {
+			intervalSeconds = timeInt * 3600
+		} else {
+			intervalSeconds = timeInt * 60
+		}
+
+		resetRatKharej(intervalSeconds)
+		fmt.Println("\033[93m────────────────────────────────────────\033[0m")
+	}
+}
+
+func enableResetIran() {
+	deleteCron()
+	deleteCron2()
+	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
+	displayNotification("\033[93mQuestion time !\033[0m")
+	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("\033[93mDo you want to enable/edit \033[96mReverseTLS \033[92mreset time\033[93m? (\033[92myes\033[93m/\033[91mno\033[93m): \033[0m")
+	enableReset := readInputs(reader)
+
+	if enableReset == "yes" || enableReset == "y" {
+		fmt.Println("\033[93m╭───────────────────────────────────────╮\033[0m")
+		fmt.Println("1. \033[92mHour\033[0m")
+		fmt.Println("2. \033[93mMinute\033[0m")
+		fmt.Println("\033[93m╰───────────────────────────────────────╯\033[0m")
+
+		fmt.Print("\033[93mEnter your choice: \033[0m")
+		timeUnitChoice := readInputs(reader)
+
+		var timeUnit string
+		if timeUnitChoice == "1" {
+			timeUnit = "hour"
+		} else if timeUnitChoice == "2" {
+			timeUnit = "minute"
+		} else {
+			fmt.Println("\033[91mWrong choice\033[0m")
+			return
+		}
+
+		fmt.Print("\033[93mEnter the \033[92mdesired input\033[93m: \033[0m")
+		timeValue := readInputs(reader)
+		timeInt, err := strconv.Atoi(timeValue)
+		if err != nil {
+			fmt.Println("\033[91mInvalid input for time value\033[0m")
+			return
+		}
+
+		var intervalSeconds int
+		if timeUnit == "hour" {
+			intervalSeconds = timeInt * 3600
+		} else {
+			intervalSeconds = timeInt * 60
+		}
+
+		resetRatIran(intervalSeconds)
+		fmt.Println("\033[93m────────────────────────────────────────\033[0m")
+	}
+}
+
+func resetRatKharej(interval int) {
+    daemonScript := fmt.Sprintf(`#!/bin/bash
+INTERVAL=%d
+
+while true; do
+    /bin/bash /etc/tls.sh
+    sleep $INTERVAL
+done
+`, interval)
+	err := os.WriteFile("/usr/local/bin/tls_daemon.sh", []byte(daemonScript), 0755)
+	if err != nil {
+		fmt.Println("Error writing daemon script:", err)
+		return
+	}
+
+	exec.Command("chmod", "+x", "/usr/local/bin/tls_daemon.sh").Run()
+
+	serviceContent := `[Unit]
+Description=Custom Daemon
+
+[Service]
+ExecStart=/usr/local/bin/tls_daemon.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+`
+
+	err = os.WriteFile("/etc/systemd/system/tls_reset.service", []byte(serviceContent), 0644)
+	if err != nil {
+		fmt.Println("Error writing service file:", err)
+		return
+	}
+
+	ipsecScript := `#!/bin/bash
+systemctl daemon-reload
+pids=$(pgrep rtun-client)
+sudo kill -9 $pids
+sudo systemctl restart rtun-kharej
+sudo journalctl --vacuum-size=1M
+`
+	err = os.WriteFile("/etc/tls.sh", []byte(ipsecScript), 0755)
+	if err != nil {
+		fmt.Println("Error writing TLS reset script:", err)
+		return
+	}
+
+	exec.Command("chmod", "+x", "/etc/tls.sh").Run()
+	exec.Command("systemctl", "daemon-reload").Run()
+	exec.Command("systemctl", "enable", "tls_reset.service").Run()
+	exec.Command("systemctl", "restart", "tls_reset.service").Run()
+}
+
+func resetRatIran(interval int) {
+    daemonScript := fmt.Sprintf(`#!/bin/bash
+INTERVAL=%d
+
+while true; do
+    /bin/bash /etc/tls.sh
+    sleep $INTERVAL
+done
+`, interval)
+	err := os.WriteFile("/usr/local/bin/tls_daemon.sh", []byte(daemonScript), 0755)
+	if err != nil {
+		fmt.Println("Error writing daemon script:", err)
+		return
+	}
+
+	exec.Command("chmod", "+x", "/usr/local/bin/tls_daemon.sh").Run()
+
+	serviceContent := `[Unit]
+Description=Custom Daemon
+
+[Service]
+ExecStart=/usr/local/bin/tls_daemon.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+`
+
+	err = os.WriteFile("/etc/systemd/system/tls_reset.service", []byte(serviceContent), 0644)
+	if err != nil {
+		fmt.Println("Error writing service file:", err)
+		return
+	}
+
+	ipsecScript := `#!/bin/bash
+systemctl daemon-reload
+pids=$(pgrep rtun-server)
+sudo kill -9 $pids
+sudo systemctl restart rtun-iran
+sudo journalctl --vacuum-size=1M
+`
+	err = os.WriteFile("/etc/tls.sh", []byte(ipsecScript), 0755)
+	if err != nil {
+		fmt.Println("Error writing IPSec reset script:", err)
+		return
+	}
+
+	exec.Command("chmod", "+x", "/etc/tls.sh").Run()
+	exec.Command("systemctl", "daemon-reload").Run()
+	exec.Command("systemctl", "enable", "tls_reset.service").Run()
+	exec.Command("systemctl", "restart", "tls_reset.service").Run()
+}
 func getIPv4() string {
 	interfaces, err := net.Interfaces()
 	if err != nil {
@@ -205,6 +415,17 @@ func mainMenu() {
 }
 func rmv() error {
 	file := "/etc/tls.sh"
+	if _, err := os.Stat(file); err == nil {
+		err := os.Remove(file)
+		if err != nil {
+			return fmt.Errorf("\033[91mbash file doesn't exists:\033[0m %v", err)
+		}
+		fmt.Println("\033[92mbash file removed successfully!\033[0m")
+	}
+	return nil
+}
+func rmv2() error {
+	file := "/usr/local/bin/tls_daemon.sh"
 	if _, err := os.Stat(file); err == nil {
 		err := os.Remove(file)
 		if err != nil {
@@ -502,6 +723,7 @@ func deleteCron() {
 		fmt.Println("\033[91mCron doesn't exist, moving on..!\033[0m")
 	}
 }
+
 func cronMenu() {
 	clearScreen()
 	fmt.Println("\033[92m ^ ^\033[0m")
@@ -512,9 +734,9 @@ func cronMenu() {
 
 	prompt := &survey.Select{
 		Message: "Enter your choice Please:",
-		Options: []string{"1. \033[92mHours\033[0m", "2. \033[93mMinutes\033[0m", "0. \033[94mBack to the main menu\033[0m"},
+		Options: []string{"1. \033[92mIRAN\033[0m", "2. \033[93mKharej\033[0m", "0. \033[94mBack to the main menu\033[0m"},
 	}
-    
+
 	var choice string
 	err := survey.AskOne(prompt, &choice)
 	if err != nil {
@@ -522,19 +744,19 @@ func cronMenu() {
 	}
 
 	switch choice {
-	case "1. \033[92mHours\033[0m":
-		resHourz()
-	case "2. \033[93mMinutes\033[0m":
-		resMins()
+	case "1. \033[92mIRAN\033[0m":
+		enableResetIran()
+	case "2. \033[93mKharej\033[0m":
+		enableResetKharej()
 	case "0. \033[94mBack to the main menu\033[0m":
-	    clearScreen()
+		clearScreen()
 		mainMenu()
 	default:
 		fmt.Println("\033[91mInvalid choice\033[0m")
 	}
-
 	readInput()
 }
+
 func resHourz() {
 	deleteCron()
 	deleteCron2()
@@ -663,6 +885,7 @@ func resMins() {
 }
 
 const crontabFilePath = "/var/spool/cron/crontabs/root"
+
 func resKharej() {
 	deleteCron()
 	deleteCron2()
@@ -1169,6 +1392,7 @@ func removews() {
 	deleteCron3()
 	deleteCron4()
 	rmv()
+	rmv2()
 
 
 	if _, err := os.Stat("/root/reverse-tunnel"); err == nil {
@@ -1176,7 +1400,7 @@ func removews() {
 	}
 
 	azumiServices := []string{
-		"rtun-iran", "rtun-kharej",
+		"rtun-iran", "rtun-kharej", "tls_reset",
 	}
 
 	for _, serviceName := range azumiServices {
@@ -1468,7 +1692,7 @@ func iranWst() {
 		fmt.Printf("\033[91mCouldn't create iran service:\033[0m %v\n", err)
 		return
 	}
-    resIran()
+    enableResetIran()
 	fmt.Println("\033[92mIran Service Created Successfully.\033[0m")
 }
 
@@ -1604,7 +1828,7 @@ func kharejWst() {
 		fmt.Printf("\033[91mCouldn't create kharej service:\033[0m %v\n", err)
 		return
 	}
-    resKharej()
+    enableResetKharej()
 	fmt.Println("\033[92mKharej Service Created Successfully.\033[0m")
 }
 
@@ -1709,7 +1933,7 @@ func kharejWst6() {
 		fmt.Printf("\033[91mCouldn't create kharej service:\033[0m %v\n", err)
 		return
 	}
-    resKharej()
+    enableResetKharej()
 	fmt.Println("\033[92mKharej Service Created Successfully.\033[0m")
 }
 func wsMenu2() {
@@ -1896,7 +2120,7 @@ func iranWsu() {
 		fmt.Printf("\033[91mCouldn't create iran service:\033[0m %v\n", err)
 		return
 	}
-    resIran()
+    enableResetIran()
 	fmt.Println("\033[92mIran Service Created Successfully.\033[0m")
 }
 func genPortu(serverNum int) string {
@@ -1989,7 +2213,7 @@ func kharejWsu() {
 		fmt.Printf("\033[91mCouldn't create kharej service:\033[0m %v\n", err)
 		return
 	}
-    resKharej()
+    enableResetKharej()
 	fmt.Println("\033[92mKharej Service Created Successfully.\033[0m")
 }
 func kharejWsu6() {
@@ -2067,7 +2291,7 @@ func kharejWsu6() {
 		fmt.Printf("\033[91mCouldn't create kharej service:\033[0m %v\n", err)
 		return
 	}
-    resKharej()
+    enableResetKharej()
 	fmt.Println("\033[92mKharej Service Created Successfully.\033[0m")
 }
 func cmd(name string, args ...string) error {
@@ -2332,7 +2556,7 @@ SkipCert:
 		fmt.Printf("\033[91mCouldn't create iran service:\033[0m %v\n", err)
 		return
 	}
-	resIran()
+	enableResetIran()
 	fmt.Println("\033[92mIran Service Created Successfully.\033[0m")
 }
 
@@ -2428,7 +2652,7 @@ func kharejWsst() {
 		fmt.Printf("\033[91mCouldn't create kharej service:\033[0m %v\n", err)
 		return
 	}
-    resKharej()
+    enableResetKharej()
 	fmt.Println("\033[92mKharej Service Created Successfully.\033[0m")
 }
 
@@ -2562,7 +2786,7 @@ SkipCert:
 		fmt.Printf("\033[91mCouldn't create iran service:\033[0m %v\n", err)
 		return
 	}
-    resIran()
+    enableResetIran()
 	fmt.Println("\033[92mIran Service Created Successfully.\033[0m")
 }
 
@@ -2639,6 +2863,6 @@ func kharejWssu() {
 		fmt.Printf("\033[91mCouldn't create kharej service:\033[0m %v\n", err)
 		return
 	}
-    resKharej()
+    enableResetKharej()
 	fmt.Println("\033[92mKharej Service Created Successfully.\033[0m")
 }

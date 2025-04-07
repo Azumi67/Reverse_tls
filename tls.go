@@ -1565,10 +1565,10 @@ func kharejWst_2() {
 	binaryPath := "/root/reverse-tunnel/rtun-server-tcp"
 	if _, err := os.Stat(binaryPath); os.IsNotExist(err) {
 		fmt.Println("\033[93mrtun-server-tcp not found. Building TCP server binary...\033[0m")
-		install1TCP()
+		install2TCP()
 	} else {
 		fmt.Println("\033[93mrtun-server-tcp already exists. Rebuilding TCP server binary...\033[0m")
-		install1TCP()
+		install2TCP()
 	}
 
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
@@ -1674,10 +1674,10 @@ func kharejWst6_2() {
 	binaryPath := "/root/reverse-tunnel/rtun-server-tcp"
 	if _, err := os.Stat(binaryPath); os.IsNotExist(err) {
 		fmt.Println("\033[93mrtun-server-tcp not found. Building TCP server binary...\033[0m")
-		install1TCP()
+		install2TCP()
 	} else {
 		fmt.Println("\033[93mrtun-server-tcp already exists. Rebuilding TCP server binary...\033[0m")
-		install1TCP()
+		install2TCP()
 	}
 
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
@@ -1951,10 +1951,10 @@ func kharejWsu_2() {
 	binaryPath := "/root/reverse-tunnel/rtun-server-udp"
 	if _, err := os.Stat(binaryPath); os.IsNotExist(err) {
 		fmt.Println("\033[93mrtun-server-udp not found. Building UDP server binary...\033[0m")
-		install1UDP()
+		install2UDP()
 	} else {
 		fmt.Println("\033[93mrtun-server-udp already exists. Rebuilding UDP server binary...\033[0m")
-		install1UDP()
+		install2UDP()
 	}
 
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
@@ -2033,10 +2033,10 @@ func kharejWsu6_2() {
 	binaryPath := "/root/reverse-tunnel/rtun-server-udp"
 	if _, err := os.Stat(binaryPath); os.IsNotExist(err) {
 		fmt.Println("\033[93mrtun-server-udp not found. Building UDP server binary...\033[0m")
-		install1UDP()
+		install2UDP()
 	} else {
 		fmt.Println("\033[93mrtun-server-udp already exists. Rebuilding UDP server binary...\033[0m")
-		install1UDP()
+		install2UDP()
 	}
 
 	fmt.Println("\033[93m───────────────────────────────────────\033[0m")
